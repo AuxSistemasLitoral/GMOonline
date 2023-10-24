@@ -1,0 +1,44 @@
+<app-header titulo="Detalle Pedido" (click)="btnRegresar()"></app-header>
+<ion-content fullscreen="true">
+<ion-list>
+  <ion-item>
+    <ion-label><b>Cliente:</b> {{PEP.nombresucu}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label><b>Sucursal: </b>{{PEP.sucursal}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label><b>NO IMP: </b> {{PEP.subtotalnoiva}}</ion-label>
+  </ion-item> 
+  <ion-item>
+    <ion-label><b>NETO: </b> {{PEP.subtotal}}</ion-label>
+  </ion-item>
+  <ion-item-sliding *ngFor="let Productos of PEP.DetallePedido">
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          {{Productos.nombre}}
+        </ion-row>
+        <ion-row>
+          <p>{{Productos.referencia}}</p>
+        </ion-row>
+      </ion-grid>
+      <ion-note slot="start" size="3">
+        <h3>{{Productos.cantidad}}</h3>
+      </ion-note>
+      <ion-button slot="end" (click)="frmCantidad(Productos)">
+        <ion-icon name="build"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-item-sliding>
+
+  <ion-item>
+    <ion-label position="floating" value="descripcion"><b>Descripción</b></ion-label>
+    <ion-textarea appInputText (input)="actObservaciones($event.target.value)" maxlength="200" inputmode="text" type="text"></ion-textarea>
+  </ion-item>
+</ion-list>
+  <ion-item>
+  <ion-button (click)="enviarPedido()"><ion-icon slot="end" name="enter-outline"></ion-icon>Enviar Pedido</ion-button>
+  <ion-button (click)="guardarPedido()"><ion-icon slot="end" name="save-outline"></ion-icon>Guardar Pedido</ion-button>
+  </ion-item>
+</ion-content>

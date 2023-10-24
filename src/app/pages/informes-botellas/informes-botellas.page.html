@@ -1,0 +1,22 @@
+<app-header titulo="Botellas 750" (click)="btnRegresar()"></app-header>
+<ion-content padding [fullscreen]="true">
+  <ion-header>
+    <ion-item>
+        <ion-datetime  displayFormat="MMMM" [(ngModel)]="Hoy" cancelText="Cancelar" doneText="Aceptar" placeholder="Selecciona el Mes"
+        [monthNames]="NombreMeses" (ionChange)="consultarBotellas()">
+        </ion-datetime>
+      </ion-item>
+ </ion-header>
+ <div *ngIf="Pedidos.length>0">
+  <div class="card_resumen ion-align-items-center" >
+    <ion-card>
+      <ion-item class="ion-activated">
+        <ion-label class="ion-text-center">
+          <h1><strong>{{ Botellas | number : '1.0-0' }}</strong></h1>
+          <p>Unidades Vendidas 750</p>
+        </ion-label>
+      </ion-item>
+     </ion-card>
+  </div>
+ </div>
+</ion-content>

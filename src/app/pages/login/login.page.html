@@ -1,0 +1,58 @@
+<ion-content>
+
+  <ion-grid class="grid1">
+      <ion-row class="row1">
+          <ion-col class="img-container">
+            <img src="../../assets/Header/Login.png">
+          </ion-col>
+      </ion-row>
+      <ion-row class="row2">
+          <ion-col>
+          </ion-col>
+      </ion-row>
+  </ion-grid>
+  
+  <ion-slide>
+      <div class="contaier-login">
+          <ion-grid>
+              <ion-row>
+              </ion-row>
+              <ion-row [formGroup]="loginForm"  ng-submit="login()">
+                  <ion-col>
+                      <ion-list>
+                          <ion-item>
+                              <ion-icon name="person" class="icon-login"></ion-icon>
+                              <ion-input [(ngModel)]="logindata.usu" value="" formControlName="usu" type="number" required placeholder="Usuario"></ion-input>
+                          </ion-item>
+                          <ng-container *ngFor="let error of error_messages.usu">
+                            <div
+                              *ngIf="loginForm.get('usu').hasError(error.type) && (loginForm.get('usu').dirty || loginForm.get('usu').touched)">
+                              {{ error.message }}
+                            </div>
+                          </ng-container>
+                          <br />
+                          <ion-item>
+                              <ion-icon name="key-outline" class="icon-login"></ion-icon>
+                              <ion-input [(ngModel)]="logindata.contra" formControlName="contra" type="password" required placeholder="Contraseña"></ion-input>
+                          </ion-item>
+                          <ng-container *ngFor="let error of error_messages.contra">
+                            <div
+                              *ngIf="loginForm.get('contra').hasError(error.type) && (loginForm.get('contra').dirty || loginForm.get('contra').touched)">
+                              {{ error.message }}
+                            </div>
+                          </ng-container>
+                      </ion-list>
+                  </ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col>
+                      <ion-button (click)="login()" [disabled]="!loginForm.valid" type="submit" fill="solid" expand="full">
+                          Ingresar
+                      </ion-button>
+                  </ion-col>
+              </ion-row>
+          </ion-grid>
+      </div>
+  </ion-slide>
+  <div><p>Versión 3</p></div>
+</ion-content>

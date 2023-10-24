@@ -1,0 +1,19 @@
+  <ion-toolbar color="primary" *ngIf="PEP">
+   <ion-item color="tertiary">
+    <ion-icon name="layers-outline"></ion-icon>
+    <ion-label>Pedido en Progreso</ion-label>
+    <ion-icon name="list" (click)="OpcionesPedido()"></ion-icon>
+  </ion-item>
+  <ion-item color="primary">
+    <ion-icon name="storefront"></ion-icon>
+    <ion-label> <b>Sucursal</b> {{PEP.nombresucu}}</ion-label>
+  </ion-item>
+  <ion-item color="primary">
+    <ion-icon name="cash-outline"></ion-icon>
+    <ion-label> <b> ANT. IMP: {{PEP.subtotalnoiva}}</b></ion-label>
+  </ion-item>
+  <ion-item color="primary">
+    <ion-icon name="cash-outline"></ion-icon>
+    <ion-label> <b>NETO: {{PEP.subtotal}}</b></ion-label>
+  </ion-item>
+  </ion-toolbar>

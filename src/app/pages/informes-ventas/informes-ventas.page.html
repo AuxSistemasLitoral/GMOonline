@@ -1,0 +1,68 @@
+<app-header titulo="Informes de Ventas" (click)="btnRegresar()"></app-header>
+<ion-content padding [fullscreen]="true">
+  <ion-header>
+    <ion-item>
+        <ion-datetime  displayFormat="MMMM" [(ngModel)]="Hoy" cancelText="Cancelar" doneText="Aceptar" placeholder="Selecciona el Mes"
+        [monthNames]="NombreMeses" (ionChange)="Consultarinformes()">
+        </ion-datetime>
+      </ion-item>
+ </ion-header>
+ <div *ngIf="Pedidos.length>0">
+  <div class="card_resumen ion-align-items-center" >
+    <!-- <ion-card>
+      <ion-item class="ion-activated">
+        <ion-label class="ion-text-center">
+          <h1><strong>{{ResumenClientes | number}}</strong></h1>
+          <p>Clientes Impactados</p>
+        </ion-label>
+      </ion-item>
+     </ion-card>
+     -->
+    <ion-card>
+      <ion-item class="ion-activated">
+        <ion-label class="ion-text-center">
+          <h1><strong>{{ ResumenAcumulado | currency : 'USD' : 'symbol' : '1.0-0'  }}</strong></h1>
+          <p>Acumulado Ventas</p>
+        </ion-label>
+      </ion-item>
+     </ion-card>
+     <ion-card>
+      <ion-item class="ion-activated" *ngFor="let item of Presupuesto">
+        <ion-label class="ion-text-center">
+          <h1><strong>{{ item.Valor | currency : 'USD' : 'symbol' : '1.0-0' }}</strong></h1>
+          <p>Presupuesto mes</p>
+        </ion-label>
+      </ion-item>
+     </ion-card>
+     <ion-card>
+      <ion-item class="ion-activated" *ngFor="let item of Presupuesto">
+        <ion-label class="ion-text-center">
+          <h1><strong>{{ ((ResumenAcumulado * 100) / item.Valor) | number:'1.0-0' }} %</strong></h1>
+          <p>Cumplimiento</p>
+        </ion-label>
+      </ion-item>
+     </ion-card>
+  </div>
+    <hr>
+    <ion-list>
+      <ion-item>
+        <ion-searchbar search-icon=false style="padding-left: 0mm;" placeholder="Buscar" #inpbuscar></ion-searchbar>
+    <ion-button class="mBton" (click)="Buscarinforme(inpbuscar.value)" >
+      <ion-icon name="search-outline"></ion-icon>
+    </ion-button> 
+      </ion-item>
+        <ion-item *ngFor="let ped of Pedidos | buscador:BuscarInp" class="allowCopy" (click)="irDetalle(ped)">
+          <ion-label>
+            <h2>{{ped.documento}}</h2>
+            <h3>{{ped.f201_descripcion_sucursal}}</h3>
+            <p>{{ped.fecha}}
+            <ion-chip color="primary">
+                <ion-icon name="cash-outline"></ion-icon>
+                <ion-label>{{ ped.NETO | currency : 'USD' : 'symbol' : '1.0-0' }} </ion-label> 
+            </ion-chip>
+            </p>
+          </ion-label>
+        </ion-item>
+    </ion-list>
+ </div>
+</ion-content>

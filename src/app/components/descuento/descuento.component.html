@@ -1,0 +1,57 @@
+<app-header titulo="Oferta"></app-header>
+  <ion-content fullscreen padding>
+    <ion-list *ngFor="let item of itemDescuentos">
+      <ion-item>
+        <label><b>Vigencia:</b> {{item.FecDesde}} - {{item.FecHasta}}</label> 
+      </ion-item>
+      <ion-item>
+        <ion-grid>
+          <ion-row class="enc" style="border: 1px solid">
+            <ion-col>
+              <b>Desde</b>
+            </ion-col>
+            <ion-col>
+              <b>Hasta</b>
+            </ion-col>
+            <ion-col>
+              <!-- <div *ngIf="item.cant_obseq > 0; then VlrDescto > 0 else PorcDescto > 0"></div>
+              <b>Obsequio</b>
+              <ng-template #thenBlock>Content to render when condition is true.</ng-template>
+              <ng-template #elseBlock>Content to render when condition is false.</ng-template> -->
+              <ng-template [ngIf]="item.idObsequio > 0"><b>Obsequio</b></ng-template>
+              <ng-template [ngIf]="item.VlrDescto > 0"><b>Descuento</b></ng-template>
+              <ng-template [ngIf]="item.PorcDescto > 0"><b>Descuento</b></ng-template>
+          </ion-col>
+          <ion-col *ngIf="item.TCliente">
+            <b>Tipo</b> 
+          </ion-col>
+          </ion-row>
+          <ion-row *ngFor="let item of itemDescuentos[0].DetalleCant" class="enc">
+            <ion-col> {{item.cant_min}}</ion-col>
+            <ion-col> {{item.cant_max}}</ion-col>
+            <ion-col> 
+              <!-- {{item.cant_obseq} -->
+              <ng-template [ngIf]="item.cant_obseq > 0">{{item.cant_obseq }}</ng-template>
+              <ng-template [ngIf]="item.vlr_dcto > 0">{{item.vlr_dcto | currency : 'USD' : 'symbol' : '1.0-0' }}</ng-template>
+              <ng-template [ngIf]="item.porc_dcto > 0">{{item.porc_dcto | number: '1.1-1' }} %</ng-template>
+            </ion-col>
+            <ion-col *ngIf="item.nombre_mayor">
+              {{item.nombre_mayor}}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <!-- <ion-item *ngIf="item.PorcDescto > 0">
+        <label><b>Descuento en %:</b> {{item.PorcDescto | number }}</label>
+      </ion-item>
+      <ion-item  *ngIf="item.VlrDescto > 0">
+        <label><b>Descuento en $:</b> {{item.VlrDescto | currency : 'USD' : 'symbol' : '1.0-0' }}</label>
+      </ion-item> -->
+      <ion-item  *ngIf="item.idObsequio > 0">
+        <label><b>Obsequio:</b>{{item.Obsequio}}</label>
+      </ion-item>
+      <ion-item *ngIf="item.TCliente > 1">
+        <label><b>Tipo Cliente:</b> {{item.TCliente}}</label>
+      </ion-item>
+    </ion-list>
+  </ion-content>

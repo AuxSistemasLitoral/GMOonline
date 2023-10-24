@@ -1,0 +1,18 @@
+.expand-wrapper {
+    transition: max-height 0.1s ease-in-out;
+    overflow: hidden;
+    height: auto;
+  }
+  
+  .collapsed {
+    max-height: 0 !important;
+  }
+
+  ion-button.button {
+    --padding-start: 5px !important;
+    --padding-end: 5px !important;
+  }
+
+  ion-card {
+    font-size: 20px !important;
+  }

@@ -1,0 +1,96 @@
+<app-header titulo="Cartera" (click)="btnRegresar()">
+</app-header>
+<ion-content fullscreen="true" class="allowCopy">
+  <ion-list *ngIf="!Cartera">
+    <ion-item no-lines>
+      <ion-avatar slot="start">
+          <ion-icon src="../../../assets/icon/credit-card.svg" size="large"></ion-icon>
+      </ion-avatar>
+      <p> El Cliente seleccionado no tiene cartera</p>
+    </ion-item >
+  </ion-list>
+
+  <ion-list *ngIf="Cartera">
+    <ion-item *ngFor="let Enc_Cartera of Cartera">
+      <ion-avatar slot="start">
+          <ion-icon src="../../../assets/icon/user2.svg" size="large"></ion-icon>
+      </ion-avatar>
+          <ion-label>
+            <ion-text>
+              <p><strong>Nit:</strong> {{Enc_Cartera.ClienteNit }}</p>
+            </ion-text>
+            <ion-text>
+              <p><strong>Nombre Sucursal:</strong> {{Enc_Cartera.NombreSuc }}</p>
+            </ion-text>
+            <ion-text>
+              <p><strong>Dirección:</strong> {{Enc_Cartera.Direccion }}</p>
+            </ion-text>
+          </ion-label>
+      </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="Cartera">
+    <ion-item *ngFor="let Enc_Cartera of Cartera">
+      <ion-avatar slot="start">
+          <ion-icon src="../../../assets/icon/dinero.svg" size="large"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <ion-text>
+          <h5><strong>Cupo: </strong>{{ Enc_Cartera.Cupo | currency : 'USD' : 'symbol' : '1.0-0' }}</h5>
+        </ion-text>
+        <ion-text>
+          <h5><strong>Saldo Corriente: </strong>{{ Enc_Cartera.Corriente | currency : 'USD' : 'symbol' : '1.0-0' }}</h5>
+        </ion-text>
+        <ion-text>
+          <h5><strong>Saldo Vencido: </strong>{{ Enc_Cartera.Vencido | currency : 'USD' : 'symbol' : '1.0-0' }}</h5>
+        </ion-text>
+        <ion-text>
+          <h5><strong>Disponible: </strong>{{ Enc_Cartera.Disponible | currency : 'USD' : 'symbol' : '1.0-0' }}</h5>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="Cartera">
+    <ion-item *ngFor="let dat_Cartera of Cartera">
+      <ion-avatar slot="start">
+          <ion-icon src="../../../assets/icon/calendar.svg" size="large"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <ion-text>
+          <h5><strong>1 - 15 días:</strong> {{ dat_Cartera.D15 | currency : 'USD' : 'symbol' : '1.0-0' }}</h5>
+        </ion-text>
+        <ion-text>
+          <h5><strong>16 - 30 días:</strong> {{ dat_Cartera.D30 | currency : 'USD' : 'symbol' : '1.0-0' }}</h5>
+        </ion-text>
+        <ion-text>
+          <h5><strong>31 - 45 días:</strong> {{ dat_Cartera.D45 | currency : 'USD' : 'symbol' : '1.0-0' }}</h5>
+        </ion-text>
+        <ion-text>
+          <h5><strong>Más de 45 días:</strong> {{ dat_Cartera.DMAS | currency : 'USD' : 'symbol' : '1.0-0' }}</h5>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="Cartera"> 
+   <ion-item no-lines>
+      <ion-icon src="../../../assets/icon/recibo.svg" ></ion-icon>
+      <ion-label class="header-card-client"> <h5><strong> Detalle Facturas</strong></h5></ion-label>
+    </ion-item>
+  <ion-grid style="padding-left: 18px; padding-right: 5px;">
+    <ion-row>
+      <ion-col class="cssList"size="2.2">N. DOC</ion-col>
+      <ion-col class="cssList"size="2.5">FECHA</ion-col>
+      <ion-col class="cssList"size="2.5">VENCE</ion-col>
+      <ion-col class="cssList"size="3">SALDO</ion-col>
+      <ion-col class="cssList" size="1.5">DÍAS</ion-col>
+    </ion-row>
+    <ion-row  *ngFor="let det_Cartera of Cartera[0].DetalleFacturas" color="det_Cartera.dias>0 ? 'danger' : ''">
+      <ion-col class="cssList2" size="2.2">{{ det_Cartera.Factura }}</ion-col>
+      <ion-col class="cssList2" size="2.5">{{ det_Cartera.fecha }}</ion-col>
+      <ion-col class="cssList2" size="2.5">{{ det_Cartera.vence }}</ion-col>
+      <ion-col class="cssList2" style="text-align: right;" size="3">{{ det_Cartera.saldo | currency : 'USD' : 'symbol' : '1.0-0'}}</ion-col>
+      <ion-col class="cssList2" style="text-align: right;" size="1.5" [ngClass]="det_Cartera.dias>0 && valfac(det_Cartera.Factura) ? 'col-danger' : ''">{{ valfac(det_Cartera.Factura)? det_Cartera.dias:0}}</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-list>
+</ion-content>

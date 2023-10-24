@@ -1,0 +1,35 @@
+    .cssList{
+        font-weight: bold;
+        font-size: 12px !important;
+        border: solid 0.5px #ddd;
+        align-items: center;
+    }
+    .cssList2{
+        font-size: 12px !important;
+        border: solid 0.5px #ddd;
+        align-items: center;
+    }
+
+
+     ion-list {
+                ion-item {
+                    --padding-start: -5px;
+                    --inner-padding-end: -5px;
+                }
+            }
+    
+    .col-danger{
+        color: #ac0303 !important;
+    }
+
+
+    .csslist3{
+        padding:0px!important;
+    }
+
+    .allowCopy{
+        -webkit-user-select: text;
+        -moz-user-select: text;
+        -ms-user-select: text;
+        user-select: text; 
+    }

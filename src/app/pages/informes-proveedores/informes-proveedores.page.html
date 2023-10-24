@@ -1,0 +1,54 @@
+<app-header titulo="Informes de Proveedores" (click)="btnRegresar()"></app-header>
+<ion-content padding [fullscreen]="true">
+  <ion-header>
+    <ion-item>
+        <ion-datetime  displayFormat="MMMM" [(ngModel)]="Hoy" cancelText="Cancelar" doneText="Aceptar" placeholder="Selecciona el Mes"
+        [monthNames]="NombreMeses" (ionChange)="Consultarinformes()">
+        </ion-datetime>
+      </ion-item>
+      <ion-item *ngIf="proveedores"> 
+        <ion-label>Proveedor</ion-label>
+        <ion-select [(ngModel)]="proveedorSelect" (ionChange)="Consultarinformes()">
+          <ion-select-option *ngFor="let proveedor of proveedores" value="{{proveedor.idProveedor}}">{{proveedor.Proveedor}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+ </ion-header>
+ <div *ngIf="productos.length>0">
+  <div class="card_resumen ion-align-items-center" >
+    <ion-card>
+      <ion-item class="ion-activated">
+        <ion-label class="ion-text-center">
+          <h1><strong>{{ResumenProductos | number}}</strong></h1>
+          <p>Cantidad Productos</p>
+        </ion-label>
+      </ion-item>
+     </ion-card> 
+    
+    <ion-card>
+      <ion-item class="ion-activated">
+        <ion-label class="ion-text-center">
+          <h1><strong>{{ ResumenVendido | currency : 'USD' : 'symbol' : '1.0-0'  }}</strong></h1>
+          <p>Total Venta Proveedor</p>
+        </ion-label>
+      </ion-item>
+     </ion-card>
+
+  </div>
+    <hr>
+    <ion-list>
+        <ion-item *ngFor="let ped of productos" class="allowCopy">
+          <ion-label>
+            <h3>{{ped.ReferenciaItem}}</h3>
+            <h2>{{ped.DescripcionItem}}</h2>
+            <h2>Cantidad {{ped.CANT | number}}</h2>
+            <p>
+            <ion-chip color="primary">
+                <ion-icon name="cash-outline"></ion-icon>
+                <ion-label>{{ ped.NETO | currency : 'USD' : 'symbol' : '1.0-0' }} </ion-label> 
+            </ion-chip>
+            </p>
+          </ion-label>
+        </ion-item>
+    </ion-list>
+ </div>
+</ion-content>

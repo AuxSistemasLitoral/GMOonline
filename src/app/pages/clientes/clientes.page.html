@@ -1,0 +1,50 @@
+<app-header titulo="Clientes">
+ </app-header>
+ <ion-content padding [fullscreen]="true">
+   <ion-header>
+    <ion-item>
+      <ion-searchbar search-icon=false style="padding-left: 0mm;" placeholder="Buscar" #search></ion-searchbar>
+        <ion-button [disabled]="!ItemBD" class="mBton" (click)="BuscarCliente(search.value)" >
+          <ion-icon name="search-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="cancelBtn()" class="mBton" slot="end">
+          <ion-icon name="close-outline"></ion-icon>
+        </ion-button>
+     </ion-item>
+    </ion-header>
+  <div *ngIf="ItemBD ">
+      <ion-card (click)="expandItem(detalles)" *ngFor="let detalles of ItemBD" class="allowCopy">
+        <ion-item>
+          <ion-icon name="storefront" color="primary"></ion-icon>
+
+          <ion-label class="header-card-client">  <ion-icon *ngIf="detalles.pedidos>0" color="danger" name="checkmark-circle-outline"></ion-icon> {{detalles.sucursal}} - {{detalles.nombresuc}}
+
+          </ion-label>
+          <ion-icon name="today-outline"></ion-icon>
+          <div class="header-card-client"> {{detalles.ruta_dia}} </div>
+        </ion-item>
+        <ion-card-content>
+          <ion-label class="header-card-client">{{detalles.nit}} - {{detalles.nombrecli}}</ion-label>
+          <p><ion-label class="header-card-client"><ion-icon name="location"></ion-icon> {{detalles.direccion}} <ion-icon name="call"></ion-icon> {{detalles.telefono}}</ion-label></p>
+          <p><ion-label class="header-card-client"><ion-icon name="file-tray-full"></ion-icon> Lista de Precio: {{detalles.listaprecio}} <ion-icon name="time-outline"></ion-icon> CP: {{detalles.condpago}} </ion-label>
+            <!-- Zona: {{detalles.zona}}</p>  -->
+        </ion-card-content> 
+        <ion-item>
+          <ion-button (click)="GenerarPedido(detalles)"><ion-icon name="bag-add-outline"></ion-icon></ion-button>
+          <ion-button (click)="mostrarNovedad(detalles)" [color]="detalles.novedades > 0 ? 'medium' : 'info'"><ion-icon name="warning"></ion-icon></ion-button>
+          <ion-button [color]="detalles.cartera>1 ? 'danger' : 'primary'" (click)="mostrarCartera(detalles.id)">
+            <ion-icon name="wallet-outline"></ion-icon> {{detalles.cupo | currency : 'USD' : 'symbol' : '1.0-0'}}
+          </ion-button>
+         </ion-item>
+      </ion-card>
+  </div>
+  <div *ngIf="!ItemBD">
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  </div>
+ <div *ngIf="isPEP" class="ion-text-center">
+  <ion-button (click)="cancelarPedido()">
+    <ion-icon name="close"></ion-icon>
+    Cancelar Pedido
+  </ion-button>
+ </div>
+</ion-content>

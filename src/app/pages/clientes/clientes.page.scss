@@ -1,0 +1,27 @@
+.Cliente_Cartera{
+    text-align: right;
+}
+.cartera-morosa > * > button {
+    background-color: #ff4040 !important;
+    color: white !important;
+}
+.header-card-client{
+    font-size: .8rem;
+    padding-left: 5px;
+}
+
+.actionNovedades{
+    --background: #a0554f;
+    
+}
+
+.mBton{
+    margin: 0;
+}
+
+.allowCopy{
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+	user-select: text; 
+}

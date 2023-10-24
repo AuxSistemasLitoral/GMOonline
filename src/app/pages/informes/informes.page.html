@@ -1,0 +1,14 @@
+<app-header titulo="Informes"></app-header>
+<ion-slide>
+    <section class="containerbtn">
+        <ion-button class="mBton" color="tertiary" (click)="Ir('/proveedores')"><strong>Proveedores</strong></ion-button>
+        <br>
+        <ion-button class="mBton" color="tertiary" (click)="Ir('/recaudos')"><strong>Recaudos</strong></ion-button>
+        <br>
+        <ion-button class="mBton" color="tertiary" (click)="Ir('/ventas')"><strong>Ventas</strong></ion-button>
+        <br>
+        <ion-button hidden="!values" class="mBton" color="tertiary" 
+          (click)="Ir('/botellas')"><strong>Botellas 750</strong></ion-button>
+         
+    </section>
+  </ion-slide>

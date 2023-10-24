@@ -1,0 +1,100 @@
+<app-header titulo="Productos"></app-header>
+<ion-content [fullscreen]="true"
+  [scrollEvents]="true"> 
+
+  <ion-header>
+    <ion-item>
+      <ion-searchbar  style="padding-left: 0mm;" search-icon=false  placeholder="Buscar" #search [(ngModel)]="inpBuscar">
+      </ion-searchbar>
+      <ion-button class="mBton" (click)="BuscarProducto(search.value)">
+        <ion-icon name="search-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-header>
+
+  <div *ngIf="Productos" style="padding-top:1rem;">
+   <div *ngFor="let detallesProductos of Productos"> 
+        <ion-card (click)="expandItem(detallesProductos)">
+          <ion-card-header>
+            <ion-card-title class="allowCopy">
+              <ion-chip color="success" *ngIf="detallesProductos.Descuento > 0"
+                (click)="mostrarDescuento(detallesProductos.id)">
+                <ion-icon name="flash-outline"></ion-icon>
+                <ion-label>Oferta</ion-label>
+              </ion-chip>
+              <ion-icon *ngIf="detallesProductos.cantidad>0" color="primary" name="checkmark-circle-outline"></ion-icon>
+              {{detallesProductos.nombre}}
+            </ion-card-title>
+            <ion-card-subtitle>
+               <p>
+                <!--<b>Bodega:</b> {{detallesProductos.bodega}} -->
+                <b>Referencia:</b> {{detallesProductos.referencia}}
+                <b>Empaque:</b>  {{detallesProductos.factor}}
+              </p>
+            </ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content *ngIf="detallesProductos.expanded">
+            <div *ngIf="detallesProductos.lista_precio">
+              <div *ngFor="let lista_precio of detallesProductos.lista_precio">
+
+                <b>LP: </b> {{lista_precio.lista}}
+                <b>Precio: </b> {{lista_precio.precio | currency : 'USD' : 'symbol' : '1.0-0'}}
+                -
+                <b>No iva: </b>{{lista_precio.noiva | currency : 'USD' : 'symbol' : '1.0-0'}}
+              </div>
+            </div>
+            <div *ngIf="detallesProductos.disponible">
+                <ion-grid>
+                  <ion-row>
+                    <b>Disponible:</b> {{detallesProductos.disponible | number}}
+                  </ion-row>
+                  <ion-row>
+                    <div *ngIf="isPEP" size="2">
+                      <div (click)="frmCantidad(detallesProductos)" class="center-text">
+                        <ion-icon slot="start" name="bag-add" size="large" color="primary"></ion-icon>
+                      </div>
+                    </div>
+                  </ion-row>
+                </ion-grid>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </div>   
+  </div>
+  <div *ngIf="Productos.length < 1">
+    <ion-card>
+      <ion-card-content>
+        No hay productos para mostrar
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- <div >
+    <ion-refresher slot="fixed" style="margin-top:3rem;" (ionRefresh)="cargarmas($event)">
+      <ion-refresher-content refreshingText="Cargando más...">
+      </ion-refresher-content>
+    </ion-refresher>
+  </div> -->
+
+
+
+  <!-- <div *ngIf="loading">
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  </div> -->
+
+  <div *ngIf="Productos.length > 5">
+    <ion-button class="myBtn" (click)="ScrollToTop()"><ion-icon slot="end" name="chevron-up-outline"></ion-icon></ion-button>
+  </div>
+
+
+
+  <ion-infinite-scroll slot="fixed" style="margin-top:3rem;" id="infinite-scroll" (ionInfinite)="cargarmas($event)">
+    <ion-infinite-scroll-content loading-spinner="bubbles" loading-text="Cargando...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <div *ngIf="!Productos">
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  </div>
+
+<app-footer></app-footer>

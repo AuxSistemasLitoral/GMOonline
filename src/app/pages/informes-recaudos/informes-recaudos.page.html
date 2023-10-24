@@ -1,0 +1,46 @@
+<app-header titulo="Informes de Recaudos" (click)="btnRegresar()"></app-header>
+<ion-content padding [fullscreen]="true">
+  <ion-header>
+    <ion-item>
+        <ion-datetime  displayFormat="MMMM" [(ngModel)]="Hoy" cancelText="Cancelar" doneText="Aceptar" placeholder="Selecciona el Mes"
+        [monthNames]="NombreMeses" (ionChange)="Consultarinformes()">
+        </ion-datetime>
+      </ion-item>
+ </ion-header>
+ <div *ngIf="Recaudos.length>0">
+  <div class="card_resumen ion-align-items-center" >
+    
+    <ion-card>
+      <ion-item class="ion-activated">
+        <ion-label class="ion-text-center">
+          <h1><strong>{{ ResumenAcumulado | currency : 'USD' : 'symbol' : '1.0-0'  }}</strong></h1>
+          <p>Acumulado del Recaudo</p>
+        </ion-label>
+      </ion-item>
+     </ion-card>
+
+  </div>
+    <hr>
+    <ion-list>
+      <ion-item>
+        <ion-searchbar search-icon=false style="padding-left: 0mm;" placeholder="Buscar" #inpbuscar></ion-searchbar>
+    <ion-button class="mBton" (click)="Buscarinforme(inpbuscar.value)" >
+      <ion-icon name="search-outline"></ion-icon>
+    </ion-button> 
+      </ion-item>
+        <ion-item *ngFor="let ped of Recaudos | buscadorRecaudo:BuscarInp" class="allowCopy">
+          <ion-label>
+            <h3>{{ped.CLIENTE}}</h3>
+            <h2>Factura {{ped.DOC_FAC}} - {{ped.FEC_FAC}}</h2>
+            <h2>Recibo {{ped.DOC_PAGO}} - {{ped.FEC_PAGO}}</h2>
+            <p>
+            <ion-chip color="primary">
+                <ion-icon name="cash-outline"></ion-icon>
+                <ion-label>{{ ped.f354_valor_cr | currency : 'USD' : 'symbol' : '1.0-0' }} </ion-label> 
+            </ion-chip>
+            </p>
+          </ion-label>
+        </ion-item>
+    </ion-list>
+ </div>
+</ion-content>

@@ -1,0 +1,27 @@
+<ion-tabs>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="clientes">
+      <ion-icon name="people-outline"></ion-icon>
+
+      <ion-badge *ngIf="cliente" color="primary"><ion-icon name="alert-outline"></ion-icon></ion-badge>
+      <ion-label>Clientes</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="productos">
+      <ion-icon name="cube-outline"></ion-icon>
+      <ion-label>Productos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="pedidos">
+      <ion-icon name="cart-outline"></ion-icon>
+      <ion-label>Pedidos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="informes">
+      <ion-icon name="stats-chart-outline"></ion-icon>
+      <ion-label>Informes</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs>
